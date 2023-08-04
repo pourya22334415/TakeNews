@@ -1,1 +1,0 @@
-# Roshan Internship TakeNews Project
