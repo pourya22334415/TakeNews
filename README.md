@@ -23,7 +23,7 @@
   </tr>
   <tr>
     <td> Search news based on Tags </td>
-    <td> "api/?tags=(string) </td>
+    <td> "api/?search=(string) </td>
   </tr>
   <tr>
     <td> Search news based on ID </td>
