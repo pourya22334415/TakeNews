@@ -1,7 +1,8 @@
 # Roshan Internship Scraper Project
 ## Stage: Challange2
 <hr>
-##  Installation
+
+## Installation
 
 - Make a git clone or download it in zip:
     ```bash
