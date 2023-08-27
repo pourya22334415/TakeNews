@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  django:
+    build: .
+    container_name: django
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+      - CELERY_BROKER=redis://reids:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+    
+  celery_worker:
+    build: .
+    restart: always
+    command: celery -A config worker --concurrency=1 -l INFO
+    volumes:
+      - .:/usr/src/app/
+    depends_on:
+      - django
+      - redis
+
+  celery_beat:
+    build: .
+    command: celery -A config beat -l INFO
+    volumes:
+      - .:/usr/src/app/
+    depends_on:
+      - django
+      - redis
+
+  celery_flower:
+    build: .
+    command: celery -A config flower -l INFO
+    environment:
+      - CELERY_BROKER_URL=redis://redis/0
+      - CELERY_BACKEND_URL=redis://redis/0
+      - FLOWER_PORT=8888
+    volumes:
+      - .:/usr/src/app/
+    ports:
+        - "8888:8888"
+    depends_on:
+      - django
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    expose:
+      - 6379
+    ports:
+      - 6379:6379

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+    <style> 
+            h0 {
+            font-size: 45px;
+        }
+
+            h1 {
+            font-size: 30px;
+        }
+            
+            h2 {
+            font-size: 22px;
+        }
+
+            h3 {
+            font-size: 18px;
+            line-height: 4px;
+        }
+            
+            p  {
+            font-size: 22px;
+        }
+    </style>
+    <body>
+    <meta charset="utf-8">
+        <h0> News </h0>
+        {% for new in object_list%}
+            <new>
+                <h1>Title: {{new.title}}</h1>
+                <ul>
+                    <p>{{new.content}}</p>
+
+                    <h2> Tags: </h2>
+                    <ul>
+                        {% for tag in new.tags_list %}
+                            <h3> {{tag}} </h3>
+                        {% endfor %}
+                    </ul>
+
+                    <h2> Source: </h2>
+                    <ul>
+                        <li><a href={{new.source}}> {{new.source}} </a></li>
+                    </ul>
+                </ul>
+            </new>
+            <hr>
+        {% endfor %}
+    </body>
+</html>
