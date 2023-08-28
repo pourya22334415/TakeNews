@@ -131,6 +131,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+
+# REST FRAMEWORK SETTINGS
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 25
+}
+
+
 # CELERY SETTINGS
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
