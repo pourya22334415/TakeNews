@@ -3,6 +3,7 @@ version: '3.8'
 services:
   django:
     build: .
+    restart: always
     container_name: django
     command: >
       sh -c "python manage.py makemigrations &&
@@ -17,21 +18,26 @@ services:
       - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
       - CELERY_BROKER=redis://reids:6379/0
       - CELERY_BACKEND=redis://redis:6379/0
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     depends_on:
       - redis
-    
+      - elastic_search
+
   celery_worker:
     build: .
     restart: always
-    command: celery -A config worker --concurrency=1 -l INFO
+    container_name: celery-worker
+    command: celery -A config worker --concurrency=2 -l INFO
     volumes:
       - .:/usr/src/app/
     depends_on:
       - django
       - redis
+      - elastic_search
 
   celery_beat:
     build: .
+    container_name: celery-beat
     command: celery -A config beat -l INFO
     volumes:
       - .:/usr/src/app/
@@ -41,6 +47,7 @@ services:
 
   celery_flower:
     build: .
+    container_name: celery-flower
     command: celery -A config flower -l INFO
     environment:
       - CELERY_BROKER_URL=redis://redis/0
@@ -56,7 +63,17 @@ services:
 
   redis:
     image: "redis:alpine"
+    container_name: redis
     expose:
       - 6379
     ports:
-      - 6379:6379
+      - "6379:6379"
+
+  elastic_search:
+    container_name: elasticsearch
+    image: elasticsearch:8.9.1
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"

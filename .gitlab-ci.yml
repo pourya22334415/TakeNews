@@ -67,8 +67,3 @@ django-tests:
   script:
     - python3 TakeNews/manage.py test
 
-deploy:
-  stage: deploy
-  script: echo "Define your deployment script!"
-  environment: production
-

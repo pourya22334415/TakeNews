@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'api.apps.ApiConfig',
     'django_filters',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
+    
     
     "django.contrib.admin",
     "django.contrib.auth",
@@ -135,7 +138,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # REST FRAMEWORK SETTINGS
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 25
 }
 
@@ -149,3 +152,13 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_DEFAULT_QUEUE = 'default'
+
+
+# ELASTIC SETTINGS
+
+ELASTICSEARCH_DSL = {
+    "default": {
+        "hosts": "elasticsearch:9200",
+        "timeout": 60, 
+    }
+}

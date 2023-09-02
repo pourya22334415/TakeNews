@@ -1,5 +1,5 @@
 # Roshan Internship TakeNews Project
-## Stage: Challange3
+## Stage: Challange4
 <hr>
 <h2> urls: </h2>
 <table>
@@ -21,7 +21,11 @@
   </tr>
   <tr>
     <td> Search news based on Tags </td>
-    <td> "api/?search=(string) </td>
+    <td> "api/?search=(string)" </td>
+  </tr>
+  <tr>
+    <td> Search news based on Content [elasticsearch] </td>
+    <td> "search/(string)" </td>
   </tr>
   <tr>
     <td> Search news based on ID </td>
@@ -55,3 +59,4 @@
     # Then run this command:
     python manage.py createsuperuser
     ```
+
