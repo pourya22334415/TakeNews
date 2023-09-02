@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+from .models import New
 
 
 
@@ -46,11 +47,19 @@ class NewsScraper():
     def get_news_urls(self):
         urls = []
         links_xpath = 'a[class="link__CustomNextLink-sc-1r7l32j-0 iCQspp"]'
+        
+        if (New.objects.count() != 0):
+            last_news = New.objects.last().source
+        else:
+            last_news = "db-is-empty"
  
         links = self.driver.find_elements(By.CSS_SELECTOR, links_xpath)
         for link in links:
             href = link.get_attribute('href')
-            urls.append(href)
+            if (href != last_news):
+                urls.append(href)
+            else:
+                break
         
         return urls
 

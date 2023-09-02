@@ -3,17 +3,13 @@ FROM python:3.11.3-alpine
 ENV PYTHONUNBUFFERED=1
 WORKDIR /usr/src/app
 
-# install chromedriver
+
+# install selenium requirements
 RUN apk update
 RUN apk add chromium chromium-chromedriver
 
-# update apk repo
-RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories && \
-    echo "http://dl-4.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
-
-# install chromedriver
-RUN apk update
-RUN apk add chromium chromium-chromedriver
+# install curl
+RUN apk add curl
 
 # set display port to avoid crash
 ENV DISPLAY=:99

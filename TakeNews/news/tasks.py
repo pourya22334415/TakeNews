@@ -14,13 +14,8 @@ def update_news():
     scraper = NewsScraper(start_url)
     data = scraper.get_data()
 
-    # delete old data
-    os.system('rm -f db.sqlite3')
-    os.system('python manage.py makemigrations')
-    os.system('python manage.py migrate')
-
     # add new data
-    for d in data:
+    for d in reversed(data):
         obj = New(title=d['title'].replace('\u200c', ' '), 
                     content=[c.replace('\u200c', ' ') for c in d['content']], 
                     tags=d['tags'], 
