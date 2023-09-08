@@ -1,5 +1,12 @@
 # Roshan Internship TakeNews Project
 ## Stage: Challange4
+## services:
+- Django REST Framework
+- Docker
+- Redis
+- Celery
+- Selenium
+- Elastic Search
 <hr>
 <h2> urls: </h2>
 <table>
