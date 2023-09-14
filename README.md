@@ -1,5 +1,4 @@
-# Roshan Internship Scraper Project
-## Stage: Challange2
+# Challange2: Web Scraping using Scrapy
 <hr>
 
 ## Installation
