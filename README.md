@@ -1,5 +1,4 @@
-# Roshan Internship TakeNews Project
-## Stage: Challange1
+# Implementation of REST API
 <hr>
 <h3><li><a href="http://pouryakarami.pythonanywhere.com/"> PythonAnyWhere Link </a></li></h3>
 <hr>
