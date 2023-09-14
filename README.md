@@ -1,5 +1,4 @@
-# Roshan Internship TakeNews Project
-## Stage: Challange4
+# Add full text search to TakeNews project with ElasticSearch
 ## services:
 - Django REST Framework
 - Docker
