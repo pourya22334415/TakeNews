@@ -1,5 +1,4 @@
-# Roshan Internship TakeNews Project
-## Stage: Challange3
+# Deckerizing and add Redis and Celery to TakeNews project
 <hr>
 <h2> urls: </h2>
 <table>
